@@ -1,12 +1,34 @@
 @import url('./reset.css');
 @import url('./base.css');
 
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
 .form {
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 50px;
+  margin: 20px 0;
+}
+
+.input {
+  flex: 1 1 200px;
+  max-width: 400px;
+}
+
+.button {
+  flex: 0 0 auto;
 }
 
 .form input[type='text'] {
@@ -41,11 +63,35 @@
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0;
   list-style: none;
-  margin: 0;
+}
+
+@media (max-width: 479px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .gallery li {
@@ -65,15 +111,28 @@
   text-decoration: none;
 }
 
-.gallery img {
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.gallery-item img {
   width: 100%;
-  height: 200px;
   object-fit: cover;
-  display: block;
-  border-radius: 12px 12px 0 0;
+  aspect-ratio: 4/3;
   transition: transform 0.3s ease;
 }
 
+.gallery-item:hover img {
+  transform: scale(0.97);
+}
+
+@media (hover: none) {
+  .gallery-item:hover img {
+    transform: none;
+  }
+}
 .gallery-item a:hover img {
   transform: scale(1.05);
 }
